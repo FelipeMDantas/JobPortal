@@ -1,5 +1,6 @@
-import { useClerk, useUser } from "@clerk/clerk-react";
+import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 import { assets } from "../assets/assets";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { openSignIn } = useClerk();
@@ -10,7 +11,12 @@ const Navbar = () => {
       <div className="container px-4 2xl:px-20 mx-auto flex justify-between items-center">
         <img src={assets.logo} alt="" />
         {user ? (
-          <dib></dib>
+          <div className="flex items-center gap-3">
+            <Link to={"/applications"}>Applied Jobs</Link>
+            <div> | </div>
+            <div>{`Hi, ${user.firstName} ${user.lastName}`}</div>
+            <UserButton />
+          </div>
         ) : (
           <div className="flex gap-4 max-sm:text-xs">
             <button className="text-gray-600">Recruiter Login</button>
