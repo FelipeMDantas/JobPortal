@@ -62,7 +62,7 @@ const JobListing = () => {
         </div>
 
         <div className="max-lg:hidden">
-          <h4 className="font-medium text-lg py-4">Search by Location</h4>
+          <h4 className="font-medium text-lg py-4 pt-14">Search by Location</h4>
           <ul className="space-y-4 text-gray-600">
             {JobLocations.map((location, index) => (
               <li className="flex gap-3 items-center" key={index}>
@@ -79,6 +79,7 @@ const JobListing = () => {
           Latest jobs
         </h3>
         <p className="mb-8">Get your desired job from top companies</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"></div>
       </section>
     </div>
   );
