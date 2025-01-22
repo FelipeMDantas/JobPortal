@@ -1,6 +1,12 @@
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
-import { assets, JobCategories, JobLocations } from "../assets/assets";
+import {
+  assets,
+  JobCategories,
+  JobLocations,
+  jobsData,
+} from "../assets/assets";
+import JobCard from "./JobCard";
 
 const JobListing = () => {
   const { isSearched, searchFilter, setSearchFilter } = useContext(AppContext);
@@ -79,7 +85,11 @@ const JobListing = () => {
           Latest jobs
         </h3>
         <p className="mb-8">Get your desired job from top companies</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"></div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+          {jobsData.map((job, index) => (
+            <JobCard key={index} job={job} />
+          ))}
+        </div>
       </section>
     </div>
   );
