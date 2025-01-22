@@ -7,7 +7,8 @@ const JobListing = () => {
   const { isSearched, searchFilter, setSearchFilter, jobs } =
     useContext(AppContext);
 
-  const [showFilter, setShowFilter] = useState(true);
+  const [showFilter, setShowFilter] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   return (
     <div className="container 2xl:px-20 mx-auto flex flex-col lg:flex-row max-lg:space-y-8 py-8">
@@ -60,7 +61,7 @@ const JobListing = () => {
           {showFilter ? "Close" : "Filters"}
         </button>
 
-        <div className={!showFilter && "max-lg:hidden"}>
+        <div className={showFilter ? "" : "max-lg:hidden"}>
           <h4 className="font-medium text-lg py-4">Search by Categories</h4>
           <ul className="space-y-4 text-gray-600">
             {JobCategories.map((category, index) => (
@@ -95,6 +96,21 @@ const JobListing = () => {
             <JobCard key={index} job={job} />
           ))}
         </div>
+
+        {jobs.length > 0 && (
+          <div>
+            <a href="">
+              <img src={assets.left_arrow_icon} alt="" />
+            </a>
+            {Array.from({ length: Math.ceil(jobs.length / 6) }).map(
+              (_, index) => (
+                <a key={index} href="#job-list">
+                  <button>{index + 1}</button>
+                </a>
+              )
+            )}
+          </div>
+        )}
       </section>
     </div>
   );
