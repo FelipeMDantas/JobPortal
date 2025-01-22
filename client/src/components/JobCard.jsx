@@ -20,8 +20,12 @@ const JobCard = ({ job }) => {
         {job.description.slice(0, 150).replace("<p>", "")}...
       </p>
       <div className="mt-4 flex gap-4 text-sm">
-        <button>Apply now</button>
-        <button>Learn more</button>
+        <button className="bg-blue-600 text-white px-4 py-2 rounded">
+          Apply now
+        </button>
+        <button className="text-gray-500 border border-gray-500 rounded px-4 py-2">
+          Learn more
+        </button>
       </div>
     </div>
   );
