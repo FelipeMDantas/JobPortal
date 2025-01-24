@@ -13,6 +13,22 @@ const JobListing = () => {
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState(jobs);
 
+  const handleCategoryChange = (category) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((c) => c !== category)
+        : [...prev, category]
+    );
+  };
+
+  const handleLocationChange = (location) => {
+    setSelectedLocations((prev) =>
+      prev.includes(location)
+        ? prev.filter((l) => l !== location)
+        : [...prev, location]
+    );
+  };
+
   return (
     <div className="container 2xl:px-20 mx-auto flex flex-col lg:flex-row max-lg:space-y-8 py-8">
       <div className="w-full lg:w-1/4 bg-white px-4">
@@ -69,7 +85,12 @@ const JobListing = () => {
           <ul className="space-y-4 text-gray-600">
             {JobCategories.map((category, index) => (
               <li className="flex gap-3 items-center" key={index}>
-                <input className="scale-125" type="checkbox" name="" id="" />
+                <input
+                  className="scale-125"
+                  type="checkbox"
+                  onChange={() => handleCategoryChange(category)}
+                  checked={selectedCategories.includes(category)}
+                />
                 {category}
               </li>
             ))}
@@ -81,7 +102,12 @@ const JobListing = () => {
           <ul className="space-y-4 text-gray-600">
             {JobLocations.map((location, index) => (
               <li className="flex gap-3 items-center" key={index}>
-                <input className="scale-125" type="checkbox" name="" id="" />
+                <input
+                  className="scale-125"
+                  type="checkbox"
+                  onChange={() => handleLocationChange(location)}
+                  checked={selectedLocations.includes(location)}
+                />
                 {location}
               </li>
             ))}
