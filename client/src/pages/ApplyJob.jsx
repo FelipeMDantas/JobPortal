@@ -1,6 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
+import Loading from "../components/Loading";
+import Navbar from "../components/Navbar";
+import { assets } from "../assets/assets";
 
 const ApplyJob = () => {
   const { id } = useParams();
@@ -24,9 +27,16 @@ const ApplyJob = () => {
     }
   }, [id, jobs]);
 
-  const fetch = async () => {};
-
-  return <div>ApplyJob</div>;
+  return jobData ? (
+    <>
+      <Navbar />
+      <div>
+        <img src={assets.company_icon} alt="" />
+      </div>
+    </>
+  ) : (
+    <Loading />
+  );
 };
 
 export default ApplyJob;
