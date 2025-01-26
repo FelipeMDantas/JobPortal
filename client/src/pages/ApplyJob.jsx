@@ -31,7 +31,26 @@ const ApplyJob = () => {
     <>
       <Navbar />
       <div>
-        <img src={assets.company_icon} alt="" />
+        <img src={jobData.companyId.image} alt="" />
+        <div>
+          <h1>{jobData.title}</h1>
+        </div>
+        <span>
+          <img src={assets.suitcase_icon} alt="" />
+          {jobData.companyId.name}
+        </span>
+        <span>
+          <img src={assets.location_icon} alt="" />
+          {jobData.location}
+        </span>
+        <span>
+          <img src={assets.person_icon} alt="" />
+          {jobData.level}
+        </span>
+        <span>
+          <img src={assets.money_icon} alt="" />
+          {jobData.salary}
+        </span>
       </div>
     </>
   ) : (
