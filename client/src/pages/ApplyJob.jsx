@@ -4,6 +4,8 @@ import { AppContext } from "../context/AppContext";
 import Loading from "../components/Loading";
 import Navbar from "../components/Navbar";
 import { assets } from "../assets/assets";
+import kconvert from "k-convert";
+import moment from "moment";
 
 const ApplyJob = () => {
   const { id } = useParams();
@@ -49,8 +51,13 @@ const ApplyJob = () => {
         </span>
         <span>
           <img src={assets.money_icon} alt="" />
-          {jobData.salary}
+          {kconvert.convertTo(jobData.salary)}
         </span>
+      </div>
+
+      <div>
+        <button>Apply Now</button>
+        <p>Posted {moment(jobData.date).fromNow()}</p>
       </div>
     </>
   ) : (
