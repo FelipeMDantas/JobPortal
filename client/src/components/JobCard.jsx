@@ -19,9 +19,12 @@ const JobCard = ({ job }) => {
           {job.level}
         </span>
       </div>
-      <p className="text-gray-500 text-sm mt-4">
-        {job.description.slice(0, 150).replace("<p>", "")}...
-      </p>
+      <p
+        className="text-gray-500 text-sm mt-4"
+        dangerouslySetInnerHTML={{
+          __html: `${job.description.slice(0, 150)}...`,
+        }}
+      />
       <div className="mt-4 flex gap-4 text-sm">
         <button
           onClick={() => {
