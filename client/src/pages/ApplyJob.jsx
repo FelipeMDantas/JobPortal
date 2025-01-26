@@ -92,6 +92,18 @@ const ApplyJob = () => {
                 Apply Now
               </button>
             </div>
+
+            <div>
+              <h2>More jobs from {jobData.companyId.name}</h2>
+              {/*jobs
+                .filter(
+                  (job) =>
+                    job._id !== jobData._id &&
+                    job.companyId._id === jobData.companyId._id
+                )
+                .filter((job) => true)
+                .slice(0, 4)*/}
+            </div>
           </div>
         </div>
       </div>
