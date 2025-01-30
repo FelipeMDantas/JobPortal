@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
-import { assets } from "../assets/assets";
+import { assets, jobsApplied } from "../assets/assets";
+import moment from "moment";
 
 const Applications = () => {
   const [isEdit, setIsEdit] = useState(false);
@@ -51,17 +52,37 @@ const Applications = () => {
             </div>
           )}
         </div>
-        <h2>Jobs Applied</h2>
-        <table>
+        <h2 className="text-xl font-semibold mb-4">Jobs Applied</h2>
+        <table className="min-w-full bg-white border rounded-lg">
           <thead>
             <tr>
-              <th>Company</th>
-              <th>Job Title</th>
-              <th>Location</th>
-              <th>Date</th>
-              <th>Status</th>
+              <th className="py-3 px-4 border-b text-left">Company</th>
+              <th className="py-3 px-4 border-b text-left">Job Title</th>
+              <th className="py-3 px-4 border-b text-left max-sm:hidden">
+                Location
+              </th>
+              <th className="py-3 px-4 border-b text-left max-sm:hidden">
+                Date
+              </th>
+              <th className="py-3 px-4 border-b text-left">Status</th>
             </tr>
           </thead>
+          <tbody>
+            {jobsApplied.map((job, index) =>
+              true ? (
+                <tr key={index}>
+                  <td>
+                    <img src={job.logo} alt="" />
+                    {job.company}
+                  </td>
+                  <td>{job.title}</td>
+                  <td>{job.location}</td>
+                  <td>{moment(job.date).format("ll")}</td>
+                  <td>{job.status}</td>
+                </tr>
+              ) : null
+            )}
+          </tbody>
         </table>
       </div>
     </>
