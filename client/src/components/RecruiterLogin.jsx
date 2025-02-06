@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { assets } from "../assets/assets";
+import { AppContext } from "../context/AppContext";
 
 const RecruiterLogin = () => {
   const [state, setState] = useState("Login");
@@ -8,6 +9,8 @@ const RecruiterLogin = () => {
   const [email, setEmail] = useState("");
   const [image, setImage] = useState(false);
   const [isTextDataSubmitted, setIsTextDataSubmitted] = useState(false);
+
+  const { setShowRecruiterLogin } = useContext(AppContext);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -32,10 +35,19 @@ const RecruiterLogin = () => {
         <p className="text-sm">Welcome back! Please sign in to continue</p>
         {state === "Sign Up" && isTextDataSubmitted ? (
           <>
-            <div>
+            <div className="flex items-center gap-4 my-10">
               <label htmlFor="image">
-                <img src={assets.upload_area} alt="" />
-                <input type="file" id="image" hidden />
+                <img
+                  className="w-16 rounded-full"
+                  src={image ? URL.createObjectURL(image) : assets.upload_area}
+                  alt=""
+                />
+                <input
+                  onChange={(e) => setImage(e.target.files[0])}
+                  type="file"
+                  id="image"
+                  hidden
+                />
               </label>
               <p>
                 Upload Company <br /> logo
@@ -83,14 +95,14 @@ const RecruiterLogin = () => {
             </div>
           </>
         )}
-
-        <p className="text-sm text-blue-600 my-4 cursor-pointer">
-          Forgot your password?
-        </p>
-
+        {state === "Login" && (
+          <p className="text-sm text-blue-600 mt-4 cursor-pointer">
+            Forgot your password?
+          </p>
+        )}
         <button
           type="submit"
-          className="bg-blue-600 w-full text-white py-2 rounded-full"
+          className="bg-blue-600 w-full text-white py-2 rounded-full mt-4"
         >
           {state === "Login"
             ? "Login"
@@ -98,7 +110,6 @@ const RecruiterLogin = () => {
             ? "Create Account"
             : "Next"}
         </button>
-
         {state === "Login" ? (
           <p className="mt-5 text-center">
             Don't have an account?
@@ -120,6 +131,13 @@ const RecruiterLogin = () => {
             </span>
           </p>
         )}
+
+        <img
+          onClick={(e) => setShowRecruiterLogin(false)}
+          className="absolute top-5 right-5 cursor-pointer"
+          src={assets.cross_icon}
+          alt=""
+        />
       </form>
     </div>
   );
