@@ -23,7 +23,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="add-job" element={<AddJob />} />
           <Route path="manage-jobs" element={<ManageJobs />} />
-          <Route path="view-application" element={<ViewApplications />} />
+          <Route path="view-applications" element={<ViewApplications />} />
         </Route>
       </Routes>
     </div>
