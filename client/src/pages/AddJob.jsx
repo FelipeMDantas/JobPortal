@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Quill from "quill";
+import { JobCategories, JobLocations } from "../assets/assets";
 
 const AddJob = () => {
   const [title, setTitle] = useState("");
@@ -20,15 +21,16 @@ const AddJob = () => {
   }, []);
 
   return (
-    <form>
-      <div>
-        <p>Job Title</p>
+    <form className="container p-4 flex flex-col w-full items-start gap-3">
+      <div className="w-full">
+        <p className="mb-2">Job Title</p>
         <input
           type="text"
           placeholder="Type Here"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
           required
+          className="w-full max-w-lg px-3 py-2 border-2 border-gray-300 rounded"
         />
       </div>
 
@@ -40,9 +42,46 @@ const AddJob = () => {
       <div>
         <div>
           <p>Job Category</p>
-          <select onChange={(e) => setCategory(e.target.value)}></select>
+          <select onChange={(e) => setCategory(e.target.value)}>
+            {JobCategories.map((category, index) => (
+              <option value={category} key={index}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <p>Job Location</p>
+          <select onChange={(e) => setLocation(e.target.value)}>
+            {JobLocations.map((location, index) => (
+              <option value={location} key={index}>
+                {location}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <p>Job Level</p>
+          <select onChange={(e) => setLevel(e.target.value)}>
+            <option value="Beginner level">Beginner level</option>
+            <option value="Intermediate level">Intermediate level</option>
+            <option value="Senior level">Senior level</option>
+          </select>
         </div>
       </div>
+
+      <div>
+        <p>Job Salary</p>
+        <input
+          onChange={(e) => setSalary(e.target.value)}
+          type="Number"
+          placeholder="2500"
+        />
+      </div>
+
+      <button>ADD</button>
     </form>
   );
 };
