@@ -4,9 +4,9 @@ import { nodeProfilingIntegration } from "@sentry/profiling-node";
 
 Sentry.init({
   dsn: "https://3bab94a070098a20d008b432338b641d@o4508877161496576.ingest.us.sentry.io/4508877164969984",
-  integrations: [nodeProfilingIntegration()],
+  integrations: [nodeProfilingIntegration(), Sentry.mongooseIntegration()],
   // Tracing
-  tracesSampleRate: 1.0, //  Capture 100% of the transactions
+  //tracesSampleRate: 1.0, //  Capture 100% of the transactions
 });
 // Manually call startProfiler and stopProfiler
 // to profile the code in between
