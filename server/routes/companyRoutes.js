@@ -8,7 +8,7 @@ import {
   loginCompany,
   postJob,
   registerCompany,
-} from "../controllers/companyController";
+} from "../controllers/companyController.js";
 
 const router = express.Router();
 
@@ -21,3 +21,5 @@ router.post("/login", loginCompany);
 router.post("/post-job", postJob);
 router.post("/change-status", changeHobApplicationsStatus);
 router.post("/change-visibility", changeVisibility);
+
+export default router;

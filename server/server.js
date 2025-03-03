@@ -5,6 +5,7 @@ import express from "express";
 import connectToDB from "./config/db.js";
 import * as Sentry from "@sentry/node";
 import { clerkWebHooks } from "./controllers/webhooks.js";
+import companyRoutes from "./routes/companyRoutes.js";
 
 const app = express();
 
@@ -12,6 +13,7 @@ await connectToDB();
 
 app.use(cors());
 app.use(express.json());
+app.use("/api/company", companyRoutes);
 
 app.get("/", (req, res) => res.send("API Working"));
 app.get("/debug-sentry", function mainHandler(req, res) {
