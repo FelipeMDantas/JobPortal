@@ -6,10 +6,12 @@ import connectToDB from "./config/db.js";
 import * as Sentry from "@sentry/node";
 import { clerkWebHooks } from "./controllers/webhooks.js";
 import companyRoutes from "./routes/companyRoutes.js";
+import connectToCloudinary from "./config/cloudinary.js";
 
 const app = express();
 
 await connectToDB();
+await connectToCloudinary();
 
 app.use(cors());
 app.use(express.json());
