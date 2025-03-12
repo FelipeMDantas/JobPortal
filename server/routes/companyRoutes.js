@@ -10,11 +10,12 @@ import {
   registerCompany,
 } from "../controllers/companyController.js";
 import upload from "../config/multer.js";
+import { protectCompany } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 router.get("/applicants", getCompanyJobApplicants);
-router.get("/company", getCompanyData);
+router.get("/company", protectCompany, getCompanyData);
 router.get("/list-jobs", getCompanyPostedJobs);
 
 router.post("/register", upload.single("image"), registerCompany);
