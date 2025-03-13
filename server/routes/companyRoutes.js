@@ -16,12 +16,12 @@ const router = express.Router();
 
 router.get("/applicants", getCompanyJobApplicants);
 router.get("/company", protectCompany, getCompanyData);
-router.get("/list-jobs", getCompanyPostedJobs);
+router.get("/list-jobs", protectCompany, getCompanyPostedJobs);
 
 router.post("/register", upload.single("image"), registerCompany);
 router.post("/login", loginCompany);
 router.post("/post-job", postJob);
-router.post("/change-status", changeHobApplicationsStatus);
-router.post("/change-visibility", changeVisibility);
+router.post("/change-status", protectCompany, changeHobApplicationsStatus);
+router.post("/change-visibility", protectCompany, changeVisibility);
 
 export default router;
