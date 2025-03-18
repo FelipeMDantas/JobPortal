@@ -73,7 +73,16 @@ export const loginCompany = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-export const getCompanyData = async (req, res) => {};
+export const getCompanyData = async (req, res) => {
+  try {
+    const company = req.company;
+
+    res.json({ success: true, company });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
 export const postJob = async (req, res) => {
   const { title, description, location, salary, level, category } = req.body;
 
@@ -99,6 +108,16 @@ export const postJob = async (req, res) => {
   }
 };
 export const getCompanyJobApplicants = async (req, res) => {};
-export const getCompanyPostedJobs = async (req, res) => {};
+export const getCompanyPostedJobs = async (req, res) => {
+  try {
+    const companyId = req.company._id;
+    const jobs = await Job.find({ companyId });
+
+    res.json({ success: true, jobsData: jobs });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
 export const changeHobApplicationsStatus = async (req, res) => {};
 export const changeVisibility = async (req, res) => {};
