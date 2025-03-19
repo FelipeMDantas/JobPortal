@@ -108,6 +108,7 @@ export const postJob = async (req, res) => {
   }
 };
 export const getCompanyJobApplicants = async (req, res) => {};
+
 export const getCompanyPostedJobs = async (req, res) => {
   try {
     const companyId = req.company._id;
@@ -120,4 +121,22 @@ export const getCompanyPostedJobs = async (req, res) => {
 };
 
 export const changeHobApplicationsStatus = async (req, res) => {};
-export const changeVisibility = async (req, res) => {};
+
+export const changeVisibility = async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    const companyId = req.company._id;
+    const job = await Job.findById(id);
+
+    if (companyId.toString() === job.companyId.toString()) {
+      job.visible = !job.visible;
+    }
+
+    await job.save();
+
+    res.json({ success: true, job });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
