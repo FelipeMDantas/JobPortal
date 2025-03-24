@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 
 const JobApplicationSchema = new mongoose.Schema({
   userId: { type: String, ref: "User", required: true },
@@ -15,3 +15,7 @@ const JobApplicationSchema = new mongoose.Schema({
   status: { type: String, default: "Pending" },
   date: { type: Number, required: true },
 });
+
+const JobApplication = mongoose.model("JobApplication", JobApplicationSchema);
+
+export default JobApplication;
