@@ -26,8 +26,26 @@ export const applyForJob = async (req, res) => {
     const isAlreadyApplied = await JobApplication.find({ jobId, userId });
 
     if (isAlreadyApplied.length > 0) {
+      return res.json({ success: false, message: "Already Applied" });
     }
-  } catch (error) {}
+
+    const jobData = await Job.findById(jobId);
+
+    if (!jobData) {
+      return res.json({ success: false, message: "Job Not Found" });
+    }
+
+    await JobApplication.create({
+      companyId: jobData.companyId,
+      userId,
+      jobId,
+      data: Date.now(),
+    });
+
+    res.json({ success: true, message: "Applied Successfully" });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
 };
 
 export const getUserJobApplications = async (req, res) => {};
