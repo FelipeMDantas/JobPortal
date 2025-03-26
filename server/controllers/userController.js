@@ -1,5 +1,6 @@
 import JobApplication from "../models/JobApplication.js";
 import User from "../models/User.js";
+import { v2 as cloundinary } from "cloudinary";
 
 export const getUserData = async (req, res) => {
   const userId = req.auth.userId;
@@ -48,6 +49,36 @@ export const applyForJob = async (req, res) => {
   }
 };
 
-export const getUserJobApplications = async (req, res) => {};
+export const getUserJobApplications = async (req, res) => {
+  try {
+    const userId = req.auth.userId;
 
-export const updateUserResume = async (req, res) => {};
+    const applications = await JobApplication.find({ userId })
+      .populate("companyId", "name email image")
+      .populate("jobId", "title description location category level salary")
+      .exec();
+
+    if (!applications) {
+      return res.json({
+        success: false,
+        message: "No job applications found for this user.",
+      });
+    }
+
+    return res.json({ success: true, applications });
+  } catch (error) {
+    return res.json({ success: false, message: error.message });
+  }
+};
+
+export const updateUserResume = async (req, res) => {
+  try {
+    const userId = req.auth.userId;
+    const resumeFile = req.resumeFile;
+    const userData = await User.findById(userId);
+
+    if (resumeFile) {
+      const resumeUpload = await cloundinary.uploader.upload(resumeFile.path);
+    }
+  } catch (error) {}
+};
