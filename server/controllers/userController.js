@@ -79,6 +79,13 @@ export const updateUserResume = async (req, res) => {
 
     if (resumeFile) {
       const resumeUpload = await cloundinary.uploader.upload(resumeFile.path);
+      userData.resume = resumeUpload.secure_url;
     }
-  } catch (error) {}
+
+    await userData.save();
+
+    return res.json({ success: true, message: "Resume Updated" });
+  } catch (error) {
+    return res.json({ success: false, message: error.message });
+  }
 };
