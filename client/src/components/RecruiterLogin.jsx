@@ -2,8 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const RecruiterLogin = () => {
+  const navigate = useNavigate();
+
   const [state, setState] = useState("Login");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -32,6 +36,11 @@ const RecruiterLogin = () => {
           console.log(data);
           setCompanyData(data.company);
           setCompanyToken(data.token);
+          localStorage.setItem("companyToken", data.token);
+          setShowRecruiterLogin(false);
+          navigate("/dashboard");
+        } else {
+          toast.error(data.message);
         }
       }
     } catch (error) {}
