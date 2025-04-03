@@ -1,9 +1,19 @@
 import moment from "moment";
 import { manageJobsData } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { AppContext } from "../context/AppContext";
 
 const ManageJobs = () => {
   const navigate = useNavigate();
+
+  const [jobs, setJobs] = useState(false)
+
+  const { backendUrl, companyToken } = useContext(AppContext)
+
+  const fetchCompanyJobs = async () => {
+    
+  }
 
   return (
     <div className="container p-4 max-w-5xl">

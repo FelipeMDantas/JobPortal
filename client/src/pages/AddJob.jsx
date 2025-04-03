@@ -41,6 +41,8 @@ const AddJob = () => {
         setTitle("");
         setSalary(0);
         quillRef.current.root.innerHTML = "";
+      } else {
+        toast.error(data.message);
       }
     } catch (error) {}
   };
