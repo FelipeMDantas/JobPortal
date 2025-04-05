@@ -53,7 +53,7 @@ const ManageJobs = () => {
             </tr>
           </thead>
           <tbody>
-            {manageJobsData.map((job, index) => (
+            {jobs.map((job, index) => (
               <tr key={index} className="text-gray-700">
                 <td className="py-2 px-4 border-b max-sm:hidden">
                   {index + 1}
@@ -69,7 +69,11 @@ const ManageJobs = () => {
                   {job.applicants}
                 </td>
                 <td className="py-2 px-4 border-b">
-                  <input type="checkbox" className="scale-125 ml-4" />
+                  <input
+                    type="checkbox"
+                    className="scale-125 ml-4"
+                    checked={job.visible}
+                  />
                 </td>
               </tr>
             ))}
