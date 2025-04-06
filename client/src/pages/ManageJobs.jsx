@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const ManageJobs = () => {
   const navigate = useNavigate();
 
-  const [jobs, setJobs] = useState(false);
+  const [jobs, setJobs] = useState([]);
 
   const { backendUrl, companyToken } = useContext(AppContext);
 
@@ -25,6 +26,25 @@ const ManageJobs = () => {
       }
     } catch (error) {
       toast.error(data.message);
+    }
+  };
+
+  const changeJobVisibility = async (id) => {
+    try {
+      const { data } = await axios.post(
+        backendUrl + "/api/company/change-visibility",
+        { id },
+        { headers: { token: companyToken } }
+      );
+
+      if (data.success) {
+        toast.success(data.message);
+        fetchCompanyJobs();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 
@@ -70,6 +90,7 @@ const ManageJobs = () => {
                 </td>
                 <td className="py-2 px-4 border-b">
                   <input
+                    onChange={() => changeJobVisibility(job._id)}
                     type="checkbox"
                     className="scale-125 ml-4"
                     checked={job.visible}
