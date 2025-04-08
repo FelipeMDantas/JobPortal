@@ -16,6 +16,17 @@ export const AppContextProvider = (props) => {
   const [companyData, setCompanyData] = useState(null);
 
   const fetchJobs = async () => {
+    try {
+      const { data } = await axios.get(backendUrl + "/api/jobs");
+
+      if (data.success) {
+        setJobs(data.jobs);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
     setJobs(jobsData);
   };
 
