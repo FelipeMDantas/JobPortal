@@ -84,6 +84,12 @@ export const AppContextProvider = (props) => {
     }
   }, [companyToken]);
 
+  useEffect(() => {
+    if (user) {
+      fetchUserData();
+    }
+  }, [user]);
+
   const value = {
     setSearchFilter,
     searchFilter,
