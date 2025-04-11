@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { assets, jobsApplied } from "../assets/assets";
 import moment from "moment";
+import { AppContext } from "../context/AppContext";
+import { useUser } from "@clerk/clerk-react";
 
 const Applications = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [resume, setResume] = useState(null);
+
+  const { user } = useUser();
+
+  const { backendUrl, userData, userApplications, fetchUserData } =
+    useContext(AppContext);
 
   return (
     <>

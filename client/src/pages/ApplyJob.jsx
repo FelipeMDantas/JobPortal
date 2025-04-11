@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import Loading from "../components/Loading";
 import Navbar from "../components/Navbar";
@@ -13,6 +13,8 @@ import { toast } from "react-toastify";
 
 const ApplyJob = () => {
   const { id } = useParams();
+
+  const navigate = useNavigate();
 
   const [jobData, setJobData] = useState(null);
 
@@ -40,6 +42,7 @@ const ApplyJob = () => {
       }
 
       if (!userData.resume) {
+        navigate("/applications");
         return toast.error("Upload resume to apply");
       }
     } catch (error) {}
