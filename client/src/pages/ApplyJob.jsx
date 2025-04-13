@@ -10,9 +10,11 @@ import kconvert from "k-convert";
 import moment from "moment";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useAuth } from "@clerk/clerk-react";
 
 const ApplyJob = () => {
   const { id } = useParams();
+  const { getToken } = useAuth();
 
   const navigate = useNavigate();
 

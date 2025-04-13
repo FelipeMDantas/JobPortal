@@ -55,7 +55,7 @@ const Applications = () => {
             <>
               <label className="flex items-center" htmlFor="resumeUpload">
                 <p className="bg-blue-100 text-blue-600 px-4 py-2 rounded-lg mr-2">
-                  Select Resume
+                  {resume ? resume.name : "Select Resume"}
                 </p>
                 <input
                   id="resumeUpload"
@@ -67,7 +67,7 @@ const Applications = () => {
                 <img src={assets.profile_upload_icon} alt="" />
               </label>
               <button
-                onClick={(e) => setIsEdit(false)}
+                onClick={updateResume}
                 className="bg-green-100 border border-green-400 rounded-lg px-4 py-2"
               >
                 Save
