@@ -47,7 +47,23 @@ const ApplyJob = () => {
         navigate("/applications");
         return toast.error("Upload resume to apply");
       }
-    } catch (error) {}
+
+      const token = await getToken();
+
+      const { data } = await axios.post(
+        backendUrl + "/api/users/apply",
+        { jobId: jobData._id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (data.success) {
+        toast.success(data.message);
+      } else {
+        toast.error(error.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   useEffect(() => {
