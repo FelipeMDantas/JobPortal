@@ -19,9 +19,15 @@ const ApplyJob = () => {
   const navigate = useNavigate();
 
   const [jobData, setJobData] = useState(null);
+  const [isAlreadyApplied, setIsAlreadyApplied] = useState(false);
 
-  const { jobs, backendUrl, userData, userApplications } =
-    useContext(AppContext);
+  const {
+    jobs,
+    backendUrl,
+    userData,
+    userApplications,
+    fetchUserApplications,
+  } = useContext(AppContext);
 
   const fetchJob = async () => {
     try {
@@ -66,9 +72,23 @@ const ApplyJob = () => {
     }
   };
 
+  const checkAlreadyApplied = () => {
+    const hasApplied = userApplications.some(
+      (item) => item.jobId._id === jobData._id
+    );
+
+    setIsAlreadyApplied(hasApplied);
+  };
+
   useEffect(() => {
     fetchJob();
   }, [id]);
+
+  useEffect(() => {
+    if (userApplications.length > 0 && jobData) {
+      checkAlreadyApplied();
+    }
+  }, [jobData, userApplications, id]);
 
   return jobData ? (
     <>
