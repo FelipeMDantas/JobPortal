@@ -64,6 +64,7 @@ const ApplyJob = () => {
 
       if (data.success) {
         toast.success(data.message);
+        fetchUserApplications();
       } else {
         toast.error(error.message);
       }
@@ -138,7 +139,7 @@ const ApplyJob = () => {
                 onClick={applyHandler}
                 className="bg-blue-600 p-2.5 px-10 text-white rounded"
               >
-                Apply Now
+                {isAlreadyApplied ? "Already Applied" : "Apply Now"}
               </button>
               <p className="mt-1 text-gray-600">
                 Posted {moment(jobData.date).fromNow()}
