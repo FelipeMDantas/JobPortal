@@ -56,24 +56,24 @@ const ViewApplications = () => {
                     <td className="py-2 px-4 border-b text-center">
                       {index + 1}
                     </td>
-                    <td className="py-2 px-4 border-b text-center flex">
+                    <td className="py-2 px-4 border-b text-center flex items-center">
                       <img
                         className="w-10 h-10 rounded-full mr-3 max-sm:hidden"
-                        src={applicant.imgSrc}
+                        src={applicant.userId.image}
                         alt=""
                       />
-                      <span>{applicant.name}</span>
+                      <span>{applicant.userId.name}</span>
                     </td>
                     <td className="py-2 px-4 border-b max-sm:hidden">
-                      {applicant.jobTitle}
+                      {applicant.jobId.title}
                     </td>
                     <td className="py-2 px-4 border-b max-sm:hidden">
-                      {applicant.location}
+                      {applicant.jobId.location}
                     </td>
                     <td className="py-2 px-4 border-b">
                       <a
                         className="bg-blue-50 text-blue-400 px-3 py-1 rounded inline-flex gap-2 items-center"
-                        href=""
+                        href={applicant.userId.resume}
                         target="_blank"
                       >
                         Resume <img src={assets.resume_download_icon} alt="" />
