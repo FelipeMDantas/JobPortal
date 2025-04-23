@@ -25,6 +25,24 @@ const ViewApplications = () => {
     }
   };
 
+  const changeJobApplicationStatus = async () => {
+    try {
+      const { data } = await axios.post(
+        backendUrl + "/api/company/change-status",
+        { id, status },
+        { headers: { token: companyToken } }
+      );
+
+      if (data.success) {
+        fetchCompanyJobApplications();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   useEffect(() => {
     if (companyToken) {
       fetchCompanyJobApplications();
@@ -86,10 +104,26 @@ const ViewApplications = () => {
                           className="z-10 hidden absolute right-0 md:left-0 top-0 mt-2 w-32 bg-white border 
                   border-gray-200 rounded shadow group-hover:block"
                         >
-                          <button className="block w-full text-left px-4 py-2 text-blue-500 hover:bg-gray-100">
+                          <button
+                            onClick={() =>
+                              changeJobApplicationStatus(
+                                applicant._id,
+                                "Accepted"
+                              )
+                            }
+                            className="block w-full text-left px-4 py-2 text-blue-500 hover:bg-gray-100"
+                          >
                             Accept
                           </button>
-                          <button className="block w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100">
+                          <button
+                            onClick={() =>
+                              changeJobApplicationStatus(
+                                applicant._id,
+                                "Rejected"
+                              )
+                            }
+                            className="block w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100"
+                          >
                             Reject
                           </button>
                         </div>
