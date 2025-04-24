@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { assets, viewApplicationsPageData } from "../assets/assets";
+import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -98,36 +98,40 @@ const ViewApplications = () => {
                       </a>
                     </td>
                     <td className="py-2 px-4 border-b relative">
-                      <div className="relative inline-block text-left group">
-                        <button className="text-gray-500">...</button>
-                        <div
-                          className="z-10 hidden absolute right-0 md:left-0 top-0 mt-2 w-32 bg-white border 
+                      {applicant.staus === "Pending" ? (
+                        <div className="relative inline-block text-left group">
+                          <button className="text-gray-500">...</button>
+                          <div
+                            className="z-10 hidden absolute right-0 md:left-0 top-0 mt-2 w-32 bg-white border 
                   border-gray-200 rounded shadow group-hover:block"
-                        >
-                          <button
-                            onClick={() =>
-                              changeJobApplicationStatus(
-                                applicant._id,
-                                "Accepted"
-                              )
-                            }
-                            className="block w-full text-left px-4 py-2 text-blue-500 hover:bg-gray-100"
                           >
-                            Accept
-                          </button>
-                          <button
-                            onClick={() =>
-                              changeJobApplicationStatus(
-                                applicant._id,
-                                "Rejected"
-                              )
-                            }
-                            className="block w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100"
-                          >
-                            Reject
-                          </button>
+                            <button
+                              onClick={() =>
+                                changeJobApplicationStatus(
+                                  applicant._id,
+                                  "Accepted"
+                                )
+                              }
+                              className="block w-full text-left px-4 py-2 text-blue-500 hover:bg-gray-100"
+                            >
+                              Accept
+                            </button>
+                            <button
+                              onClick={() =>
+                                changeJobApplicationStatus(
+                                  applicant._id,
+                                  "Rejected"
+                                )
+                              }
+                              className="block w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100"
+                            >
+                              Reject
+                            </button>
+                          </div>
                         </div>
-                      </div>
+                      ) : (
+                        <div>{applicant.status}</div>
+                      )}
                     </td>
                   </tr>
                 ))}
